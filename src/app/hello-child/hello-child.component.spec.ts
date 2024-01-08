@@ -10,8 +10,8 @@ describe('HelloChildComponent', () => {
     await TestBed.configureTestingModule({
       imports: [HelloChildComponent]
     })
-    .compileComponents();
-    
+      .compileComponents();
+
     fixture = TestBed.createComponent(HelloChildComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
