@@ -3,6 +3,7 @@ import { HomeComponent } from './components/home/home.component';
 import { DetailsComponent } from './components/details/details.component';
 import { HelloWorldComponent } from './components/HelloWorld/HelloWorld.component';
 import { FormComponent } from './components/form/form.component';
+import { ProductComponent } from './components/product/product.component';
 
 export const routes: Routes = [{
   path: '',
@@ -20,7 +21,12 @@ export const routes: Routes = [{
   title: 'Home world'
 },
 {
+  path: 'product',
+  component: ProductComponent,
+  title: 'Product'
+},
+{
   path: 'form',
   component: FormComponent,
-  title: 'Form'
+  title: 'Home world'
 }];

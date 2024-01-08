@@ -4,7 +4,7 @@
 
 <h5>List child</h5>
 <ul>
-    <li *ngFor="let item of items">{{item}}</li>
+    <li *ngFor="let item of items;let idx = index">{{idx}} - {{item}}</li>
 </ul>
 
 
