@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HousingLocation } from './housinglocation';
+import { HousingLocation } from '../interface/housinglocation';
 
 @Injectable({
   providedIn: 'root'
@@ -111,24 +111,24 @@ export class HousingService {
     ];
   constructor() { }
 
-  // getAllHousingLocations(): HousingLocation[] {
-  //   return this.housingLocationList;
-  // }
+  getAllHousingLocations(): HousingLocation[] {
+    return this.housingLocationList;
+  }
   
-  // getHousingLocationById(id: number): HousingLocation | undefined {
-  //   return this.housingLocationList.find(housingLocation => housingLocation.id === id);
-  // }
+  getHousingLocationById(id: number): HousingLocation | undefined {
+    return this.housingLocationList.find(housingLocation => housingLocation.id === id);
+  }
 
   submitApplication(firstName: string, lastName: string, email: string) {
     console.log(`Homes application received: firstName: ${firstName}, lastName: ${lastName}, email: ${email}.`);
   }
-  async getHousingLocationById(id: number): Promise<HousingLocation | undefined> {
-    const data = await fetch(`${this.url}/${id}`);
-    return await data.json() ?? {};
-  }
+  // async getHousingLocationById(id: number): Promise<HousingLocation | undefined> {
+  //   const data = await fetch(`${this.url}/${id}`);
+  //   return await data.json() ?? {};
+  // }
 
-  async getAllHousingLocations(): Promise<HousingLocation[]> {
-    const data = await fetch(this.url);
-    return await data.json() ?? [];
-  }
+  // async getAllHousingLocations(): Promise<HousingLocation[]> {
+  //   const data = await fetch(this.url);
+  //   return await data.json() ?? [];
+  // }
 }

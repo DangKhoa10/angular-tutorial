@@ -1,0 +1,26 @@
+<section class="listing-apply">
+    <h2 class="section-heading">Apply now to live here</h2>
+    <form [formGroup]="applyForm" (submit)="submitApplication()">
+      <label for="first-name">First Name</label>
+      <input id="first-name" type="text" formControlName="firstName">
+      <div *ngIf="applyForm['controls']['firstName'].dirty && applyForm['controls']['firstName'].errors">
+        <small *ngIf="applyForm['controls']['firstName'].errors['required']">Name không trống</small>
+        <small *ngIf="applyForm['controls']['firstName'].errors['minlength']">Ít nhất 3 ký tự</small>
+        <small *ngIf="applyForm['controls']['firstName'].errors['maxlength']">Nhiều nhất 10 ký tự</small>
+      </div>
+      <label for="last-name">Last Name</label>
+      <input id="last-name" type="text" formControlName="lastName">
+      <div *ngIf="applyForm['controls']['lastName'].dirty && applyForm['controls']['lastName'].errors">
+        <small *ngIf="applyForm['controls']['lastName'].errors['required']">LastName không trống</small>
+        <small *ngIf="applyForm['controls']['lastName'].errors['minlength']">Ít nhất 3 ký tự</small>
+        <small *ngIf="applyForm['controls']['lastName'].errors['maxlength']">Nhiều nhất 10 ký tự</small>
+      </div>
+      <label for="email">Email</label>
+      <input id="email" type="email" formControlName="email">
+      <div *ngIf="applyForm['controls']['email'].dirty && applyForm['controls']['email'].errors">
+        <small *ngIf="applyForm['controls']['email'].errors['required']">Email không trống</small>
+        <small *ngIf="applyForm['controls']['email'].errors['email']">Email không đúng định dạng</small>
+      </div>
+      <button type="submit" class="primary" [disabled]="applyForm.invalid">Apply now</button>
+    </form>
+  </section>
