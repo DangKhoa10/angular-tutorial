@@ -1,0 +1,12 @@
+<h4>{{title}}</h4>
+<p>Init project angular</p>
+
+
+<h5>List child</h5>
+<ul>
+    <li *ngFor="let item of items">{{item}}</li>
+</ul>
+
+
+<app-hello-child child="{{childTitle}}" (newItemEvent)="addItem($event)"></app-hello-child>
+
