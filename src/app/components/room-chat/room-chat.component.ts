@@ -1,7 +1,6 @@
-import { Component, Injectable, OnInit, inject } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
-import { Socket } from 'ngx-socket-io';
+import { CommonModule, isPlatformBrowser } from "@angular/common";
+import { Component, OnDestroy, OnInit, Inject, PLATFORM_ID } from "@angular/core";
+import { FormsModule } from "@angular/forms";
 import { io } from "socket.io-client";
 
 @Component({
@@ -9,27 +8,50 @@ import { io } from "socket.io-client";
   standalone: true,
   imports: [CommonModule, FormsModule],
   templateUrl: './room-chat.component.html',
-  styleUrl: './room-chat.component.css'
+  styleUrls: ['./room-chat.component.css']  // Use styleUrls
 })
 
-@Injectable({
-  providedIn: 'root',
-})
-export class RoomChatComponent implements OnInit{
+export class RoomChatComponent implements OnInit, OnDestroy {
   newMessage = '';
   messageList: string[] = [];
-  socket = io('ws://localhost:9000');
-  constructor() {}
+  socket: any
+  isBrowser: boolean = false
+
+  constructor(@Inject(PLATFORM_ID) private platformId: Object) {
+    this.isBrowser = isPlatformBrowser(this.platformId);
+
+    if (this.isBrowser) {
+      this.socket = io('http://localhost:9000');
 
 
-  ngOnInit(){
-    // this.socket.on('message', (message: string) => {
-    //   this.messageList.push(message);
-    // });
+    }
+  }
+
+
+  ngOnDestroy(): void {
+    if (this.isBrowser) {
+
+      this.socket.disconnect();
+
+    }
+  }
+
+
+
+  ngOnInit() {
+    if (this.isBrowser) {
+
+      this.socket.on('message', (message: string) => {
+        this.messageList.push(message);
+      });
+    }
   }
 
   sendMessage() {
-   // this.socket.emit('message', (this.newMessage));
-    this.newMessage = '';
+    if (this.isBrowser) {
+
+      this.socket.emit('message', (this.newMessage));
+      this.newMessage = '';
+    }
   }
 }
